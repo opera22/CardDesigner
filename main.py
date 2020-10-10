@@ -2,24 +2,36 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from PIL import Image, ImageFont, ImageDraw
+
 from printCard import *
+from menus import *
 
 cred = credentials.Certificate('serviceAccountKey.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 rootRef = db.collection("employees")
 
-#####################
-id = ""
 
+mainMenu(rootRef)
+
+
+
+
+
+
+
+
+#####################
+"""id = ""
+while len(id) != 6:
+    id = input("Please enter the employee's 6-digit ID number: ")
 
 
 rootRef.document("tom").set({ "name": "timothy" })
 rootRef.document("tom").delete()
 
 
-while len(id) != 6:
-    id = input("Please enter the employee's 6-digit ID number: ")
+
 
 userRef = rootRef.document(id)
 
@@ -33,4 +45,4 @@ if not userDoc.exists:
 
 
 
-printCard(0)
+printCard(0) """
