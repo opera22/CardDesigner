@@ -1,8 +1,7 @@
-def mainMenu():
+from misc import *
+from businesscard import *
 
-    print("--------------------------------------")
-    print("Welcome to the Business Card Designer!")
-    print("--------------------------------------")
+def mainMenu():
 
     print("Select an option:")
     print("(A) Add an employee")
@@ -16,9 +15,9 @@ def mainMenu():
     elif userInput == "r":
         pass
     elif userInput == "v":
-        pass
+        printEmployees()
     elif userInput == "e":
-        pass
+        return False
 
-
-    return
+    # if true, the menu will pop back up again 
+    return True
