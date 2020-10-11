@@ -5,7 +5,7 @@ from PIL import Image, ImageFont, ImageDraw
 
 from businesscard import *
 from menus import *
-from misc import *
+from miscellaneous import *
 
 
 def main():
@@ -30,34 +30,7 @@ def main():
 
     print("Goodbye for now!")
 
-
-
-    #####################
-    """id = ""
-    while len(id) != 6:
-        id = input("Please enter the employee's 6-digit ID number: ")
-
-
-    rootRef.document("tom").set({ "name": "timothy" })
-    rootRef.document("tom").delete()
-
-
-
-
-    userRef = rootRef.document(id)
-
-    userDoc = userRef.get()
-    if not userDoc.exists:
-        print("made it in")
-
-
-    #db.collection("employees").document(id)
-
-
-
-
-    printCard(0) """
-
     return
+
 
 main()

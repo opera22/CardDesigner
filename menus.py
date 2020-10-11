@@ -1,5 +1,6 @@
-from misc import *
+from miscellaneous import *
 from businesscard import *
+import time
 
 def mainMenu():
 
@@ -11,9 +12,9 @@ def mainMenu():
     userInput = input("").lower()
 
     if userInput == "a":
-        pass
+        addEmployeeMenu()
     elif userInput == "r":
-        pass
+        removeEmployee(getEmpId())
     elif userInput == "v":
         printEmployees()
     elif userInput == "e":
@@ -21,3 +22,16 @@ def mainMenu():
 
     # if true, the menu will pop back up again 
     return True
+
+def addEmployeeMenu():
+
+    empId = ""
+    name = ""
+    occupation = ""
+    phoneNum = ""
+    print("\nOkay, you'll need to enter some information...")
+    time.sleep(2)
+    
+
+
+    return

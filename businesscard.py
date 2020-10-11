@@ -1,9 +1,7 @@
 from menus import *
-from misc import *
+from miscellaneous import *
 
 class BusinessCard:
-
-
 
     def printCard(self, id):
 
