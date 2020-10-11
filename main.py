@@ -4,7 +4,7 @@ from firebase_admin import credentials, firestore
 from PIL import Image, ImageFont, ImageDraw
 
 from businesscard import *
-from menus import *
+from menus import mainMenu
 from miscellaneous import *
 
 

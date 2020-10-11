@@ -4,23 +4,23 @@ def printEmployees():
     print("sup brotha")
     return
 
-def removeEmployee(id):
+def removeEmployee(empId):
 
-    rootRef.document(id).delete()
-    print("Employee #" + str(id) + " was removed.")
+    rootRef.document(empId).delete()
+    print("\nEmployee #" + str(empId) + " was removed.\n")
     return
 
 def getEmpId(): 
 
-    id = ""
-    while len(id) != 6:
-        id = input("Please enter the employee's 6-digit ID number: ")
+    empId = ""
+    while len(empId) != 6:
+        empId = input("\nPlease enter the employee's 6-digit ID number: ")
 
-    return id
+    return empId
 
-def empExists(id):
+def empExists(empId):
 
-    if rootRef.document(id).get().exists:
+    if rootRef.document(empId).get().exists:
         return True
     else:
         return False

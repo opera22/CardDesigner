@@ -1,10 +1,9 @@
-from menus import *
 from miscellaneous import *
 
 class BusinessCard:
 
-    def printCard(self, id):
+    def printCard(self, empId):
 
-        print(str(id))
+        print(str(empId))
 
         return

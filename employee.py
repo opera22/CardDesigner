@@ -4,11 +4,11 @@ from businesscard import *
 
 class Employee:   
 
-    def Employee(self, id, name, occupation, phoneNum, email):
+    def Employee(self, empId, name, occupation, phoneNum, email):
 
-        if not empExists(id):
+        if not empExists(empId):
 
-            rootRef.document(id).set({
+            rootRef.document(empId).set({
 
                 "name" : name,
                 "occupation" : occupation,
@@ -17,7 +17,7 @@ class Employee:
 
             })
         else:
-            print("An employee with that ID already exists!")
+            print("\nAn employee with that ID already exists!\n")
 
         return
 
