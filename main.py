@@ -118,15 +118,17 @@ def modifyEmployeeMenu(empId):
 
 def businessCardMenu(empId):
 
+
+    doc = rootRef.document(empId).get()
+ 
+    borderSize = doc.get("borderSize")
+    color = doc.get("color")
+    font = doc.get("font")
+    
+
     if not empExists(empId):
         print("No employee with that ID!")
         return False
-
-    # need to put this info into the databse, bc it resets every loop
-    borderSize = 0.05
-    #color = "darkblue"
-    color = "navy"
-    font = "arial.ttf"
 
     print("Change a setting, or print the business card:")
     print("(B) Border size: " + str(borderSize))
@@ -137,11 +139,11 @@ def businessCardMenu(empId):
     userInput = input().lower()
 
     if userInput == "b":
-        pass
+        rootRef.document(empId).update({"borderSize": changeBorderMenu()})
     elif userInput == "c":
-        color = changeColorMenu()
+        rootRef.document(empId).update({"color": changeColorMenu()})
     elif userInput == "f":
-        pass
+        rootRef.document(empId).update({"font": changeFontMenu()})
     elif userInput == "p":
         printCard(empId, borderSize, color, font)
     elif userInput == "e":
@@ -161,11 +163,43 @@ def changeColorMenu():
     if userInput == "b":
         return "black"
     elif userInput == "l":
-        return "#00044d"
-    elif userInput == "R":
-        return "#450000"
+        return "darkblue"
+    elif userInput == "r":
+        return "darkred"
     else:
         return "black"
+
+def changeBorderMenu():
+
+    print()
+    print("Select a border width:")
+    print("(1) 15px")
+    print("(2) 30px")
+    userInput = input()
+
+    if userInput == "1":
+        return 15
+    elif userInput == "2":
+        return 30
+    else:
+        return 15
+
+def changeFontMenu():
+
+    print()
+    print("Select a font:")
+    print("(A) Arial")
+    print("(G) Garamond")
+    userInput = input().lower()
+
+    
+    if userInput == "a":
+        return "arial.ttf"
+    elif userInput == "g":
+        return "Garamond.ttf"
+    else:
+        return "arial.ttf"
+
 
 ################################################################
 # BusinessCard Functions #
@@ -180,7 +214,6 @@ def printCard(empId, borderSize, color, font):
     email = doc.get("email")
     firstLetter = name[0]
 
-    str1 = "REACT"
     image = Image.new("RGBA", (600,400), "white")
     draw = ImageDraw.Draw(image)
     fontName = ImageFont.truetype(font, 35)
@@ -201,16 +234,16 @@ def printCard(empId, borderSize, color, font):
     draw.line([((800-lineW)/2 - lineW/8, (530-lineH)/2), ((800-lineW)/2 + 9 * lineW/8, (530-lineH)/2)], fill = color, width = 2, joint = "curve")
 
     w,h = fontPhoneNum.getsize(phoneNum)
-    draw.multiline_text(((800-w)/2, (650-h)/2), phoneNum, font = fontPhoneNum, fill = color, align = "center")
+    draw.multiline_text(((800-lineW)/2 - lineW/8, (590-lineH)/2), "Call: " + phoneNum, font = fontPhoneNum, fill = color, align = "center")
+
+    w,h = fontEmail.getsize(email)
+    draw.multiline_text(((800-lineW)/2 - lineW/8, (630-lineH)/2), "Mail to: " + email, font = fontEmail, fill = color, align = "center")
 
     w,h = fontFirstLetter.getsize(firstLetter)
-    draw.multiline_text(((300-w)/2, (340-h)/2), firstLetter, font = fontFirstLetter, fill = color, align = "center")
+    draw.multiline_text(((280-w)/2, (340-h)/2), firstLetter, font = fontFirstLetter, fill = color, align = "center")
 
 
-
-    image = ImageOps.expand(image, border = 15, fill = color)
-
-
+    image = ImageOps.expand(image, border = borderSize, fill = color)
 
 
     image.show()
@@ -223,6 +256,7 @@ def printCard(empId, borderSize, color, font):
 
 def addEmployeeToDB(empId, name, occupation, phoneNum, email):
 
+        
         if not empExists(empId):
 
             rootRef.document(empId).set({
@@ -230,7 +264,10 @@ def addEmployeeToDB(empId, name, occupation, phoneNum, email):
                 "name" : name,
                 "occupation" : occupation,
                 "phoneNum" : phoneNum,
-                "email" : email
+                "email" : email,
+                "borderSize": 15,
+                "color": "black",
+                "font": "arial.ttf"
 
             })
             print("\n" + name + " was added to the database!\n")
