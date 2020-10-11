@@ -59,7 +59,14 @@ def mainMenu():
         while continueLoop:
             continueLoop = modifyEmployeeMenu(empId)
     elif userInput == "b":
-        businessCardMenu()
+        print()
+        print("-------------")
+        print("Card Designer")
+        print("-------------")
+        empId = getEmpId()
+        continueLoop = True
+        while continueLoop:
+            continueLoop = businessCardMenu(empId)
     elif userInput == "e":
         return False
 
@@ -106,27 +113,68 @@ def modifyEmployeeMenu(empId):
         return False
     return True
 
+def businessCardMenu(empId):
+
+    borderSize = 0.05
+    color = "black"
+    # the hex code for dark blue is #00044d
+    # hex code for dark red is #450000
+    font = "arial.ttf"
+
+    print("Select a setting to change, or print the business card:")
+    print("(B) Border size: " + str(borderSize))
+    print("(C) Color: " + color)
+    print("(F) Font: " + font)
+    print("(P) Print")
+    print("(E) Exit")
+    userInput = input().lower()
+
+    if userInput == "b":
+        pass
+    elif userInput == "c":
+        pass
+    elif userInput == "f":
+        pass
+    elif userInput == "p":
+        printCard(empId, borderSize, color, font)
+    elif userInput == "e":
+        return False
+
+    return True
+
+################################################################
+# BusinessCard Functions #
+################################################################
+
+def printCard(empId, borderSize, color, font):
+
+    w = 600
+    h = 400
+    str1 = "React"
+    image = Image.new("RGBA", (w,h), "white")
+    fontWithSize = ImageFont.truetype(font, 20)
+    draw = ImageDraw.Draw(image)
+
+    draw.text((w/2, h/2), str1, font = fontWithSize, fill = color, align = "center")
+
+
+    doc = rootRef.document(empId).get()
+
+    doc.get("name")
+    doc.id
+    doc.get("occupation")
+    doc.get("phoneNum")
+    doc.get("email")
 
 
 
-def businessCardMenu():
+
+    image.show()
 
     return
 
 ################################################################
-# BusinessCard Class #
-################################################################
-
-class BusinessCard:
-
-    def printCard(self, empId):
-
-        print(str(empId))
-
-        return
-
-################################################################
-# Modify Employee Database #
+# Add to/Remove from Employee Database #
 ################################################################
 
 def addEmployeeToDB(empId, name, occupation, phoneNum, email):
@@ -166,7 +214,7 @@ def printEmployees():
     print("List of Employees")
     print("-----------------")
 
-    docs = db.collection("employees").stream()
+    docs = rootRef.stream()
 
     for doc in docs:
         print(doc.get("name"))
