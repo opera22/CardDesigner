@@ -70,8 +70,8 @@ def addEmployeeMenu():
 
     print("\nOkay, you'll need to enter some information...")
     empId = getEmpId()
-    name = input("Now enter the employee's full name: ")
-    occupation = input("Now enter his/her occupation title: ")
+    name = input("Now enter his/her full name: ")
+    occupation = input("Now enter his/her occupation: ")
     phoneNum = input("Now enter his/her phone number in the format 123-456-7890: ")
     email = input("Lastly, enter his/her email in the format johnsmith@gmail.com: ")
 
@@ -84,6 +84,7 @@ def modifyEmployeeMenu(empId):
     doc = rootRef.document(empId).get()
     print("\n" + doc.get("name") + "\'s profile")
     print("-----------------------")
+    printEmployee(empId)
     print("Select an option:")
     print("(N) Update name")
     print("(O) Update occupation")
@@ -174,6 +175,19 @@ def printEmployees():
         print("Phone Number: " + doc.get("phoneNum"))
         print("Email: " + doc.get("email"))
         print()
+
+    return
+
+def printEmployee(empId):
+
+    doc = rootRef.document(empId).get()
+
+    print(doc.get("name"))
+    print("ID: " + doc.id)
+    print("Occupation: " + doc.get("occupation"))
+    print("Phone Number: " + doc.get("phoneNum"))
+    print("Email: " + doc.get("email"))
+    print()
 
     return
 
