@@ -24,7 +24,7 @@ def main():
     while continueLoop:
         continueLoop = mainMenu()
 
-    print("\n~ Goodbye for now! ~")
+    print("\n~ Goodbye for now! ~\n")
 
     return
 
@@ -50,7 +50,14 @@ def mainMenu():
     elif userInput == "v":
         printEmployees()
     elif userInput == "m":
-        modifyEmployeeMenu()
+        print()
+        print("------------------")
+        print("Update an Employee")
+        print("------------------")
+        empId = getEmpId()
+        continueLoop = True
+        while continueLoop:
+            continueLoop = modifyEmployeeMenu(empId)
     elif userInput == "b":
         businessCardMenu()
     elif userInput == "e":
@@ -60,12 +67,6 @@ def mainMenu():
     return True
 
 def addEmployeeMenu():
-
-    empId = ""
-    name = ""
-    occupation = ""
-    phoneNum = ""
-    email = ""
 
     print("\nOkay, you'll need to enter some information...")
     empId = getEmpId()
@@ -78,9 +79,34 @@ def addEmployeeMenu():
     
     return
 
-def modifyEmployeeMenu():
+def modifyEmployeeMenu(empId):
 
-    return
+    doc = rootRef.document(empId).get()
+    print("\n" + doc.get("name") + "\'s profile")
+    print("-----------------------")
+    print("Select an option:")
+    print("(N) Update name")
+    print("(O) Update occupation")
+    print("(P) Update phone number")
+    print("(M) Update email")
+    print("(E) Exit")
+
+    userInput = input("").lower()
+
+    if userInput == "n":
+        rootRef.document(empId).update({"name": input("Enter the new name: ")})
+    elif userInput == "o":
+        rootRef.document(empId).update({"occupation": input("Enter the new occupcation: ")})
+    elif userInput == "p":
+        rootRef.document(empId).update({"phoneNum": input("Enter the new phone number: ")})
+    elif userInput == "m":
+        rootRef.document(empId).update({"email": input("Enter the new email: ")})
+    elif userInput == "e":
+        return False
+    return True
+
+
+
 
 def businessCardMenu():
 
@@ -141,19 +167,21 @@ def printEmployees():
 
     docs = db.collection("employees").stream()
 
-    #bal = users_ref.get(field_paths={"name"}).to_dict().get("name")
-
     for doc in docs:
-        print(doc.id + " - " + doc.get("name"))
+        print(doc.get("name"))
+        print("ID: " + doc.id)
+        print("Occupation: " + doc.get("occupation"))
+        print("Phone Number: " + doc.get("phoneNum"))
+        print("Email: " + doc.get("email"))
+        print()
 
-    print()
     return
 
 def getEmpId(): 
 
     empId = ""
     while len(empId) != 6:
-        empId = input("\nPlease enter the employee's 6-digit ID number: ")
+        empId = input("Please enter the employee's 6-digit ID number: ")
 
     return empId
 
