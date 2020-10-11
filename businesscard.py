@@ -1,4 +1,4 @@
-from miscellaneous import *
+import miscellaneous
 
 class BusinessCard:
 

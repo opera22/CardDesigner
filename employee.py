@@ -1,6 +1,4 @@
-from menus import *
 from main import rootRef
-from businesscard import *
 
 class Employee:   
 

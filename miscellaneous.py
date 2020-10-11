@@ -5,9 +5,11 @@ def printEmployees():
     return
 
 def removeEmployee(empId):
-
-    rootRef.document(empId).delete()
-    print("\nEmployee #" + str(empId) + " was removed.\n")
+    if empExists(empId):
+        rootRef.document(empId).delete()
+        print("\nEmployee #" + str(empId) + " was removed.\n")
+    else:
+        print("\nNo employee with that ID!\n")
     return
 
 def getEmpId(): 

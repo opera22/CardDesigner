@@ -1,7 +1,6 @@
-from miscellaneous import *
-from businesscard import *
-from employee import Employee
-from time import sleep
+import miscellaneous
+import businesscard
+import employee
 
 def mainMenu():
 
@@ -36,7 +35,6 @@ def addEmployeeMenu():
     email = ""
 
     print("\nOkay, you'll need to enter some information...")
-    time.sleep(2)
     empId = getEmpId()
     occupation = input("Now enter his/her occupation title: ")
     phoneNum = input("Now enter his/her phone number in the format 123-456-7890: ")
