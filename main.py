@@ -88,6 +88,9 @@ def addEmployeeMenu():
 
 def modifyEmployeeMenu(empId):
 
+    if not empExists(empId):
+        print("No employee with that ID!")
+        return False
     doc = rootRef.document(empId).get()
     print("\n" + doc.get("name") + "\'s profile")
     print("-----------------------")
@@ -115,13 +118,17 @@ def modifyEmployeeMenu(empId):
 
 def businessCardMenu(empId):
 
+    if not empExists(empId):
+        print("No employee with that ID!")
+        return False
+
     borderSize = 0.05
     color = "black"
     # the hex code for dark blue is #00044d
     # hex code for dark red is #450000
     font = "arial.ttf"
 
-    print("Select a setting to change, or print the business card:")
+    print("Change a setting, or print the business card:")
     print("(B) Border size: " + str(borderSize))
     print("(C) Color: " + color)
     print("(F) Font: " + font)
@@ -148,14 +155,39 @@ def businessCardMenu(empId):
 
 def printCard(empId, borderSize, color, font):
 
-    w = 600
-    h = 400
-    str1 = "React"
-    image = Image.new("RGBA", (w,h), "white")
-    fontWithSize = ImageFont.truetype(font, 20)
-    draw = ImageDraw.Draw(image)
+    doc = rootRef.document(empId).get()
+    name = doc.get("name")
+    occupation = doc.get("occupation")
+    phoneNum = doc.get("phoneNum")
+    email = doc.get("email")
+    firstLetter = name[0]
 
-    draw.text((w/2, h/2), str1, font = fontWithSize, fill = color, align = "center")
+    str1 = "REACT"
+    image = Image.new("RGBA", (600,400), "white")
+    draw = ImageDraw.Draw(image)
+    fontName = ImageFont.truetype(font, 35)
+    fontOccupation = ImageFont.truetype(font, 15)
+    fontPhoneNum = ImageFont.truetype(font, 15) 
+    fontEmail = ImageFont.truetype(font, 15)
+    fontFirstLetter = ImageFont.truetype("Garamond.ttf", 300)
+
+    w,h = fontName.getsize(name)
+    # the line below the occupation should change according to length of name, not length of occupation;
+    # that's why I'm initializing a separate width and heigth here for "line"
+    lineW, lineH = fontName.getsize(name)
+    draw.multiline_text(((800-w)/2, (380-h)/2), name, font = fontName, fill = color, align = "center")
+
+    w,h = fontOccupation.getsize(occupation)
+    draw.multiline_text(((800-w)/2, (450-h)/2), occupation, font = fontOccupation, fill = color, align = "center")
+    # this next line is extremely obtuse, but all it's doing is drawing a line with the right length and position
+    draw.line([((800-lineW)/2 - lineW/8, (530-lineH)/2), ((800-lineW)/2 + 9 * lineW/8, (530-lineH)/2 )], fill = color, width = 2, joint = "curve")
+
+
+    w,h = fontPhoneNum.getsize(phoneNum)
+    draw.multiline_text(((800-w)/2, (650-h)/2), phoneNum, font = fontPhoneNum, fill = color, align = "center")
+
+    w,h = fontFirstLetter.getsize(firstLetter)
+    draw.multiline_text(((300-w)/2, (300-h)/2), firstLetter, font = fontFirstLetter, fill = color, align = "center")
 
 
     doc = rootRef.document(empId).get()
