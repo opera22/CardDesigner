@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
-from PIL import Image, ImageFont, ImageDraw
+from PIL import Image, ImageFont, ImageDraw, ImageOps
 
 try:
     app = firebase_admin.get_app()
@@ -122,10 +122,10 @@ def businessCardMenu(empId):
         print("No employee with that ID!")
         return False
 
+    # need to put this info into the databse, bc it resets every loop
     borderSize = 0.05
-    color = "black"
-    # the hex code for dark blue is #00044d
-    # hex code for dark red is #450000
+    #color = "darkblue"
+    color = "navy"
     font = "arial.ttf"
 
     print("Change a setting, or print the business card:")
@@ -139,7 +139,7 @@ def businessCardMenu(empId):
     if userInput == "b":
         pass
     elif userInput == "c":
-        pass
+        color = changeColorMenu()
     elif userInput == "f":
         pass
     elif userInput == "p":
@@ -148,6 +148,24 @@ def businessCardMenu(empId):
         return False
 
     return True
+
+def changeColorMenu():
+
+    print()
+    print("Select the main color:")
+    print("(B) Black")
+    print("(L) Blue")
+    print("(R) Red")
+    userInput = input().lower()
+
+    if userInput == "b":
+        return "black"
+    elif userInput == "l":
+        return "#00044d"
+    elif userInput == "R":
+        return "#450000"
+    else:
+        return "black"
 
 ################################################################
 # BusinessCard Functions #
@@ -180,23 +198,17 @@ def printCard(empId, borderSize, color, font):
     w,h = fontOccupation.getsize(occupation)
     draw.multiline_text(((800-w)/2, (450-h)/2), occupation, font = fontOccupation, fill = color, align = "center")
     # this next line is extremely obtuse, but all it's doing is drawing a line with the right length and position
-    draw.line([((800-lineW)/2 - lineW/8, (530-lineH)/2), ((800-lineW)/2 + 9 * lineW/8, (530-lineH)/2 )], fill = color, width = 2, joint = "curve")
-
+    draw.line([((800-lineW)/2 - lineW/8, (530-lineH)/2), ((800-lineW)/2 + 9 * lineW/8, (530-lineH)/2)], fill = color, width = 2, joint = "curve")
 
     w,h = fontPhoneNum.getsize(phoneNum)
     draw.multiline_text(((800-w)/2, (650-h)/2), phoneNum, font = fontPhoneNum, fill = color, align = "center")
 
     w,h = fontFirstLetter.getsize(firstLetter)
-    draw.multiline_text(((300-w)/2, (300-h)/2), firstLetter, font = fontFirstLetter, fill = color, align = "center")
+    draw.multiline_text(((300-w)/2, (340-h)/2), firstLetter, font = fontFirstLetter, fill = color, align = "center")
 
 
-    doc = rootRef.document(empId).get()
 
-    doc.get("name")
-    doc.id
-    doc.get("occupation")
-    doc.get("phoneNum")
-    doc.get("email")
+    image = ImageOps.expand(image, border = 15, fill = color)
 
 
 
