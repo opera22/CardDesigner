@@ -1,6 +1,5 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
-
 from PIL import Image, ImageFont, ImageDraw
 
 try:
@@ -9,10 +8,8 @@ except ValueError as e:
     cred = credentials.Certificate('serviceAccountKey.json')
     firebase_admin.initialize_app(cred)
 
-
 db = firestore.client()
 rootRef = db.collection("employees")
-
 
 ################################################################
 # Main Code -- Main Menu Loop, etc. #
@@ -27,7 +24,7 @@ def main():
     while continueLoop:
         continueLoop = mainMenu()
 
-    print("Goodbye for now!")
+    print("\n~ Goodbye for now! ~")
 
     return
 
@@ -42,6 +39,7 @@ def mainMenu():
     print("(R) Remove an employee")
     print("(V) View all employees")
     print("(M) Modify an existing employee")
+    print("(B) Business card designer")
     print("(E) Exit")
     userInput = input("").lower()
 
@@ -53,6 +51,8 @@ def mainMenu():
         printEmployees()
     elif userInput == "m":
         modifyEmployeeMenu()
+    elif userInput == "b":
+        businessCardMenu()
     elif userInput == "e":
         return False
 
@@ -82,6 +82,10 @@ def modifyEmployeeMenu():
 
     return
 
+def businessCardMenu():
+
+    return
+
 ################################################################
 # BusinessCard Class #
 ################################################################
@@ -95,7 +99,7 @@ class BusinessCard:
         return
 
 ################################################################
-# Add Employee #
+# Modify Employee Database #
 ################################################################
 
 def addEmployeeToDB(empId, name, occupation, phoneNum, email):
@@ -124,14 +128,14 @@ def removeEmployee(empId):
         print("\nNo employee with that ID!\n")
     return
 
-
 ################################################################
 # Miscellaneous Functions #
 ################################################################
 
 def printEmployees():
 
-    print("\n-----------------")
+    print()
+    print("-----------------")
     print("List of Employees")
     print("-----------------")
 
@@ -159,6 +163,5 @@ def empExists(empId):
         return True
     else:
         return False
-
 
 main()
