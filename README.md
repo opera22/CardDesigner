@@ -6,8 +6,9 @@ the cards by simply entering an employee ID number. The image manipulation is do
 
 
 # Environment
-* PIP install for Pillow
-* PIP install for firebase_admin
+* Pillow via PIP install
+* firebase_admin via PIP install
+* Python 3.8
 
 
 # Execution
