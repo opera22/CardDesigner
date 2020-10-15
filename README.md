@@ -22,15 +22,15 @@ the cards by simply entering an employee ID number. The image manipulation is do
 \
 ![Employee list](images/ss_employeeslist.png)
 
-* Here is what it looks like on Firebase (it's one collection called "employees" with a document for each employee):  
+* Here is what it looks like on Firebase (it's one collection called "employees" with a document for each employee):    
 \
 ![Firebase screenshot](images/ss_firestore.png)
 
-* And finally, to print an employee's business card, go to the designer menu, where you can also change style attributes like border width, font, color.  
+* And finally, to print an employee's business card, go to the designer menu, where you can also change style attributes like border width, font, color.    
 \
 ![Business card designer menu](images/ss_cardmenu.png)
 
-* It will download the card to your main directory, and from there you can do what you will with it. 
+* It will download the card to your main directory, and from there you can do what you will with it.   
 \ 
 ![Business card](businesscards/businesscard007007.png)
 
@@ -38,7 +38,7 @@ the cards by simply entering an employee ID number. The image manipulation is do
 \ 
 ![Business card 2](businesscards/businesscard777888.png)
 
-* If you'd like to modify an employee's information, go to the Update Employee menu. 
+* If you'd like to modify an employee's information, go to the Update Employee menu.   
 \ 
 ![Update Employee Menu](images/ss_updateemployeemenu.png)
 
