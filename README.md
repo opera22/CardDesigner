@@ -27,7 +27,7 @@ the cards by simply entering an employee ID number. The image manipulation is do
 ![Firebase screenshot](images/ss_firestore.png)
 
 * And finally, to print an employee's business card, go to the designer menu, where you can also change style attributes like border width, font, color.    
-\
+
 ![Business card designer menu](images/ss_cardmenu.png)
 
 * It will download the card to your main directory, and from there you can do what you will with it.   
