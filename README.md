@@ -31,15 +31,15 @@ the cards by simply entering an employee ID number. The image manipulation is do
 ![Business card designer menu](images/ss_cardmenu.png)
 
 * It will download the card to your main directory, and from there you can do what you will with it.   
-\ 
+
 ![Business card](businesscards/businesscard007007.png)
 
 * Here is another example: 
-\ 
+ 
 ![Business card 2](businesscards/businesscard777888.png)
 
 * If you'd like to modify an employee's information, go to the Update Employee menu.   
-\ 
+
 ![Update Employee Menu](images/ss_updateemployeemenu.png)
 
 
