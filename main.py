@@ -246,7 +246,8 @@ def printCard(empId, borderSize, color, font):
     image = ImageOps.expand(image, border = borderSize, fill = color)
 
 
-    image.show()
+    image.save("businesscards/businesscard" + str(empId) + ".png")
+    print("\nSaved as " + "businesscard" + str(empId) + ".png\n")
 
     return
 
